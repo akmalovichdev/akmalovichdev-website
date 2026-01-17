@@ -77,4 +77,4 @@ MIT License - feel free to use this template for your own portfolio!
 
 ## 👤 Author
 
-**Nurbekjon Akhmatov** - [@akmalovich](https://github.com/akmalovich)
+**Nurbekjon Akhmatov** - [@akmalovichdev](https://github.com/akmalovichdev)
