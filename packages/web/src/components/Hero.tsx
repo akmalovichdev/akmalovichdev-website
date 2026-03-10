@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Send, Twitter } from 'lucide-react';
+import { ArrowDown, FileText, Github, Instagram, Send } from 'lucide-react';
 import { PERSONAL_INFO } from '../lib/constants';
 import { scrollToSection } from '../lib/utils';
 
 export default function Hero() {
   const socialIcons = {
     github: Github,
-    linkedin: Linkedin,
     telegram: Send,
-    twitter: Twitter,
+    instagram: Instagram,
   };
 
   return (
@@ -26,15 +25,18 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="relative mb-8"
           >
-            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 p-1">
-              <div className="w-full h-full rounded-full bg-background-dark flex items-center justify-center">
-                <span className="text-5xl sm:text-6xl font-bold font-mono gradient-text">
-                  NA
-                </span>
-              </div>
+            <div className="relative z-10 w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border border-white/10 bg-white/5 p-1">
+              <img
+                src="/favicon.svg"
+                alt="akmalovich.dev avatar"
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
-            <motion.div
-              className="absolute -inset-4 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-500/20 blur-2xl"
+            <motion.img
+              src="/favicon.svg"
+              alt=""
+              aria-hidden="true"
+              className="absolute -inset-4 -z-10 rounded-full object-cover blur-2xl pointer-events-none"
               animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.3, 0.5] }}
               transition={{ duration: 4, repeat: Infinity }}
             />
@@ -95,6 +97,15 @@ export default function Hero() {
             >
               View Projects
             </button>
+            <a
+              href="/akmalovichdev.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              <FileText size={18} />
+              Portfolio PDF
+            </a>
           </motion.div>
 
           <motion.div

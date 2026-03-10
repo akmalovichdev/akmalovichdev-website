@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=packages/web",
+    "dev:api": "node services/contact-api/server.js",
     "build": "npm run build --workspace=packages/web",
     "preview": "npm run preview --workspace=packages/web",
     "lint": "eslint . --ext .ts,.tsx",

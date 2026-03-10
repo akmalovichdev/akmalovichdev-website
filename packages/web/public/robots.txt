@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Host: akmalovich.dev
+Sitemap: https://akmalovich.dev/sitemap.xml

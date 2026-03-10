@@ -1,4 +1,3 @@
-import { Heart } from 'lucide-react';
 import { PERSONAL_INFO, NAV_LINKS } from '@/lib/constants';
 import { scrollToSection } from '@/lib/utils';
 
@@ -18,8 +17,12 @@ export default function Footer() {
               }}
               className="flex items-center gap-2 mb-4"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                <span className="text-lg font-bold font-mono text-white">A</span>
+              <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/10 bg-white/5 p-1">
+                <img
+                  src="/apple-touch-icon.png"
+                  alt="akmalovich.dev logo"
+                  className="w-full h-full rounded-lg object-cover"
+                />
               </div>
               <span className="font-mono text-lg font-semibold gradient-text">
                 akmalovich.dev
@@ -77,12 +80,12 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={PERSONAL_INFO.social.linkedin}
+                  href={PERSONAL_INFO.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/60 hover:text-white transition-colors text-sm"
                 >
-                  LinkedIn
+                  Instagram
                 </a>
               </li>
               <li>
@@ -103,9 +106,14 @@ export default function Footer() {
           <p className="text-white/50 text-sm">
             © {currentYear} {PERSONAL_INFO.nickname}. All rights reserved.
           </p>
-          <p className="text-white/50 text-sm flex items-center gap-1">
-            Made with <Heart size={14} className="text-red-500" /> using React & Tailwind
-          </p>
+          <a
+            href="/akmalovichdev.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/50 text-sm hover:text-primary-400 transition-colors"
+          >
+            Portfolio by akmalovich.dev
+          </a>
         </div>
       </div>
     </footer>

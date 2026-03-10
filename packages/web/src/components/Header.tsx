@@ -58,8 +58,12 @@ export default function Header() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-              <span className="text-lg font-bold font-mono text-white">A</span>
+            <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/10 bg-white/5 p-1">
+              <img
+                src="/apple-touch-icon.png"
+                alt="akmalovich.dev logo"
+                className="w-full h-full rounded-lg object-cover"
+              />
             </div>
             <span className="hidden sm:block font-mono text-lg font-semibold gradient-text">
               akmalovich.dev

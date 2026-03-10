@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
 import { PERSONAL_INFO } from '../lib/constants';
-import { Mail, MapPin, Send, Github, Linkedin, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Instagram, MessageCircle } from 'lucide-react';
 
 export default function Contact() {
   const { ref, isInView } = useInView({ threshold: 0.2 });
@@ -13,18 +13,44 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
+    setIsSubmitted(false);
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
+      const data: { ok?: boolean; error?: string } = await response.json();
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'Contact request failed');
+      }
 
-    setTimeout(() => setIsSubmitted(false), 5000);
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Failed to send message. Please try again.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -48,14 +74,14 @@ export default function Contact() {
     {
       icon: MessageCircle,
       label: 'Telegram',
-      value: '@akmalovich',
+      value: '@akmalovichdev',
       href: PERSONAL_INFO.social.telegram,
     },
   ];
 
   const socialLinks = [
     { icon: Github, href: PERSONAL_INFO.social.github, label: 'GitHub' },
-    { icon: Linkedin, href: PERSONAL_INFO.social.linkedin, label: 'LinkedIn' },
+    { icon: Instagram, href: PERSONAL_INFO.social.instagram, label: 'Instagram' },
     { icon: MessageCircle, href: PERSONAL_INFO.social.telegram, label: 'Telegram' },
   ];
 
@@ -164,6 +190,8 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    minLength={2}
+                    maxLength={120}
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
                     placeholder="John Doe"
                   />
@@ -183,6 +211,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    maxLength={254}
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
                     placeholder="john@example.com"
                   />
@@ -202,6 +231,8 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={5}
+                    minLength={5}
+                    maxLength={5000}
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all resize-none"
                     placeholder="Tell me about your project..."
                   />
@@ -232,6 +263,15 @@ export default function Contact() {
                     className="text-center text-green-400 text-sm"
                   >
                     Thank you! Your message has been sent successfully.
+                  </motion.p>
+                )}
+                {submitError && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center text-red-400 text-sm"
+                  >
+                    {submitError}
                   </motion.p>
                 )}
               </div>

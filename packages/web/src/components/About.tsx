@@ -38,8 +38,12 @@ export default function About() {
           >
             <div className="glass-card p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                  <span className="text-2xl font-bold font-mono text-white">A</span>
+                <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-1">
+                  <img
+                    src="/apple-touch-icon.png"
+                    alt="akmalovich.dev logo"
+                    className="w-full h-full rounded-xl object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white">

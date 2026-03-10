@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
-import { PROJECTS } from '../lib/constants';
+import { PERSONAL_INFO, PROJECTS } from '../lib/constants';
 import { ExternalLink, Github, Folder } from 'lucide-react';
 
 export default function Projects() {
@@ -72,7 +72,7 @@ export default function Projects() {
                       <span>Code</span>
                     </a>
                   )}
-                  {project.demo && (
+                  {'demo' in project && project.demo && (
                     <a
                       href={project.demo}
                       target="_blank"
@@ -97,7 +97,7 @@ export default function Projects() {
           className="text-center mt-12"
         >
           <a
-            href="https://github.com/akmalovich"
+            href={PERSONAL_INFO.social.github}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"

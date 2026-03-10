@@ -14,11 +14,18 @@ export default function LoadingScreen() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-            <span className="text-3xl font-bold font-mono text-white">A</span>
+          <div className="relative z-10 w-20 h-20 rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-1">
+            <img
+              src="/apple-touch-icon.png"
+              alt="akmalovich.dev logo"
+              className="w-full h-full rounded-xl object-cover"
+            />
           </div>
-          <motion.div
-            className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 blur-xl opacity-50"
+          <motion.img
+            src="/apple-touch-icon.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 rounded-2xl object-cover blur-xl opacity-50 pointer-events-none"
             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.3, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           />

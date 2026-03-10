@@ -2,14 +2,13 @@ export const PERSONAL_INFO = {
   name: 'Nurbekjon Akhmatov',
   nickname: 'akmalovich.dev',
   title: 'DevOps & Backend Developer',
-  email: 'hello@akmalovich.dev',
+  email: 'info@akmalovich.dev',
   location: 'Uzbekistan',
   bio: 'Passionate about building scalable infrastructure and robust backend systems. I specialize in automating deployments, optimizing cloud resources, and crafting efficient APIs that power modern applications.',
   social: {
-    github: 'https://github.com/akmalovich',
-    linkedin: 'https://linkedin.com/in/akmalovich',
-    telegram: 'https://t.me/akmalovich',
-    twitter: 'https://twitter.com/akmalovich',
+    github: 'https://github.com/akmalovichdev',
+    telegram: 'https://t.me/akmalovichdev',
+    instagram: 'https://instagram.com/akmalovichdev',
   },
 } as const;
 
