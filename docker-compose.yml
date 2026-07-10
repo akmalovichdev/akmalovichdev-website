@@ -11,12 +11,20 @@ services:
       VITE_TELEGRAM_BOT_TOKEN: ${VITE_TELEGRAM_BOT_TOKEN:-}
       VITE_TELEGRAM_CHAT_ID: ${VITE_TELEGRAM_CHAT_ID:-}
       PORT: 8787
+      TZ: ${TZ:-Asia/Tashkent}
+    expose:
+      - "8787"
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://localhost:8787/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
     networks:
       - portfolio-network
 
@@ -25,26 +33,37 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: akmalovich-portfolio
-    ports:
-      - "${PORTFOLIO_PORT:-3001}:80"
     restart: unless-stopped
     depends_on:
       contact-api:
         condition: service_healthy
+    environment:
+      TZ: ${TZ:-Asia/Tashkent}
+      VIRTUAL_HOST: ${VIRTUAL_HOST:-akmalovich.dev,www.akmalovich.dev,akmalovichdev.com,www.akmalovichdev.com}
+      VIRTUAL_PORT: "80"
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-akmalovich.dev,www.akmalovich.dev,akmalovichdev.com,www.akmalovichdev.com}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-admin@akmalovichdev.com}
+    expose:
+      - "80"
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
     networks:
-      - portfolio-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portfolio.rule=Host(`akmalovich.dev`)"
-      - "traefik.http.routers.portfolio.entrypoints=websecure"
-      - "traefik.http.routers.portfolio.tls.certresolver=letsencrypt"
+      portfolio-network:
+      global-proxy:
+        aliases:
+          - akmalovich-portfolio
 
 networks:
   portfolio-network:
     driver: bridge
+  global-proxy:
+    external: true
