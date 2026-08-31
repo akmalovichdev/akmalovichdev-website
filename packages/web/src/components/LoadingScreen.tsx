@@ -8,28 +8,24 @@ export default function LoadingScreen() {
       transition={{ duration: 0.5 }}
     >
       <div className="flex flex-col items-center gap-6">
-        <motion.div
-          className="relative"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="relative z-10 w-20 h-20 rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-1">
+        <div className="relative w-20 h-20">
+          <motion.div
+            className="absolute inset-0 rounded-full overflow-hidden border-2 border-primary-500/30"
+            animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          >
             <img
               src="/apple-touch-icon.png"
-              alt="akmalovich.dev logo"
-              className="w-full h-full rounded-xl object-cover"
+              alt="Loading"
+              className="w-full h-full object-cover"
             />
-          </div>
-          <motion.img
-            src="/apple-touch-icon.png"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 rounded-2xl object-cover blur-xl opacity-50 pointer-events-none"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.3, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
+          </motion.div>
+          <motion.div
+            className="absolute -inset-2 rounded-full border-2 border-transparent border-t-primary-400"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
           />
-        </motion.div>
+        </div>
         <motion.div
           className="flex gap-1"
           initial={{ opacity: 0 }}
@@ -39,24 +35,12 @@ export default function LoadingScreen() {
           {[0, 1, 2].map((i) => (
             <motion.div
               key={i}
-              className="w-2 h-2 rounded-full bg-primary-500"
+              className="w-1.5 h-1.5 rounded-full bg-primary-400"
               animate={{ y: [0, -8, 0] }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                delay: i * 0.15,
-              }}
+              transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
             />
           ))}
         </motion.div>
-        <motion.p
-          className="text-white/60 font-mono text-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          akmalovich.dev
-        </motion.p>
       </div>
     </motion.div>
   );

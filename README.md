@@ -1,6 +1,6 @@
 # akmalovich.dev - Portfolio
 
-A modern, responsive portfolio website for Nurbekjon Akhmatov (akmalovich.dev) - DevOps & Backend Developer.
+A modern, responsive portfolio website for Akhmatov Nurbekjon (akmalovich.dev) - DevOps & Backend Developer.
 
 ## 🚀 Quick Start
 
@@ -77,4 +77,4 @@ MIT License - feel free to use this template for your own portfolio!
 
 ## 👤 Author
 
-**Nurbekjon Akhmatov** - [@akmalovichdev](https://github.com/akmalovichdev)
+**Akhmatov Nurbekjon** - [@akmalovichdev](https://github.com/akmalovichdev)

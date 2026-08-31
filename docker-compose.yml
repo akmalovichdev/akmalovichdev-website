@@ -39,10 +39,14 @@ services:
         condition: service_healthy
     environment:
       TZ: ${TZ:-Asia/Tashkent}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-akmalovich.dev,www.akmalovich.dev,akmalovichdev.com,www.akmalovichdev.com}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
       VIRTUAL_PORT: "80"
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-akmalovich.dev,www.akmalovich.dev,akmalovichdev.com,www.akmalovichdev.com}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-admin@akmalovichdev.com}
+      # Let's Encrypt SSL certificate
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      # Use HTTPS redirect (automatic)
+      HSTS: ${HSTS}
+      HTTPS_METHOD: ${HTTPS_METHOD}
     expose:
       - "80"
     healthcheck:

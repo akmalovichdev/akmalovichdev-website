@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Services from './components/Services';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
@@ -16,10 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
+    const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -40,9 +38,10 @@ function App() {
           <main>
             <Hero />
             <About />
+            <Services />
+            <Projects />
             <Skills />
             <Experience />
-            <Projects />
             <Contact />
           </main>
           <Footer />

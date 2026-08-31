@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
 import { EXPERIENCE } from '../lib/constants';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar, CheckCircle2 } from 'lucide-react';
 
 export default function Experience() {
-  const { ref, isInView } = useInView({ threshold: 0.2 });
+  const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
     <section id="experience" ref={ref} className="section-padding relative">
@@ -15,68 +15,68 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <span className="section-label">Journey</span>
+          <h2 className="section-title">
             Work <span className="gradient-text">Experience</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
-            My professional journey and the roles I've held
+          <p className="section-subtitle">
+            From self-taught developer to building production systems for thousands of users
           </p>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500 via-accent-500 to-transparent lg:-translate-x-1/2" />
+        <div className="max-w-4xl mx-auto space-y-8">
+          {EXPERIENCE.map((exp, index) => (
+            <motion.div
+              key={exp.title + exp.period}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className="glass-card-hover p-8 relative overflow-hidden group"
+            >
+              {/* Timeline dot */}
+              <div className="absolute top-8 left-0 w-1 h-full bg-gradient-to-b from-primary-500/50 to-transparent" />
 
-          <div className="space-y-12">
-            {EXPERIENCE.map((exp, index) => (
-              <motion.div
-                key={exp.title}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`relative flex flex-col lg:flex-row gap-8 ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                }`}
-              >
-                <div className="absolute left-4 lg:left-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 border-4 border-background-dark -translate-x-1/2 mt-6 z-10" />
-
-                <div className={`flex-1 pl-12 lg:pl-0 ${index % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:pl-16'}`}>
-                  <div className={`glass-card-hover p-6 sm:p-8 ${index % 2 === 0 ? 'lg:ml-auto' : ''} max-w-xl`}>
-                    <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
-                      <div className="p-2 rounded-lg bg-primary-500/20">
-                        <Briefcase className="w-5 h-5 text-primary-400" />
-                      </div>
-                      <div className={index % 2 === 0 ? 'lg:text-right' : ''}>
-                        <h3 className="text-xl font-semibold text-white">{exp.title}</h3>
-                        <p className="text-primary-400 font-medium">{exp.company}</p>
-                      </div>
-                    </div>
-
-                    <div className={`flex items-center gap-2 text-white/50 text-sm mb-4 ${index % 2 === 0 ? 'lg:justify-end' : ''}`}>
-                      <Calendar size={14} />
+              <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-4">
+                <div className="p-2.5 rounded-xl bg-primary-500/10 text-primary-400 shrink-0">
+                  <Briefcase size={20} />
+                </div>
+                <div className="flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                    <h3 className="text-xl font-bold text-white">{exp.title}</h3>
+                    <span className="flex items-center gap-1.5 text-sm text-white/40 font-mono">
+                      <Calendar size={12} />
                       {exp.period}
-                    </div>
+                    </span>
+                  </div>
+                  <p className="text-primary-400 font-medium mb-3">{exp.company}</p>
+                  <p className="text-white/60 leading-relaxed mb-4">{exp.description}</p>
 
-                    <p className={`text-white/70 leading-relaxed mb-4 ${index % 2 === 0 ? 'lg:text-right' : ''}`}>
-                      {exp.description}
-                    </p>
-
-                    <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'lg:justify-end' : ''}`}>
-                      {exp.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 text-xs bg-white/5 text-white/70 rounded-full border border-white/10"
-                        >
-                          {tech}
-                        </span>
+                  {/* Highlights */}
+                  {exp.highlights && (
+                    <ul className="space-y-2 mb-4">
+                      {exp.highlights.map((h) => (
+                        <li key={h} className="flex items-start gap-2 text-sm text-white/50">
+                          <CheckCircle2 size={14} className="text-primary-400 mt-0.5 shrink-0" />
+                          <span>{h}</span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
+                  )}
+
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 text-xs bg-white/[0.04] text-white/50 rounded-md border border-white/[0.06] font-mono"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
-
-                <div className="hidden lg:block flex-1" />
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
