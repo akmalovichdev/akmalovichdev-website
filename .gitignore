@@ -37,3 +37,7 @@ coverage/
 # Cache
 .eslintcache
 .cache/
+# Local editor and environment backups
+.env.backup.*
+.env.before-*
+packages/web/index.html.before-*
